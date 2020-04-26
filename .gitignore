@@ -6,7 +6,10 @@ CompanyInvoiceApp.Api/bin/
 CompanyInvoiceApp.Api/obj/
 CompanyInvoiceApp.UI/bin/
 CompanyInvoiceApp.UI/obj/
+CompanyInvoiceApp.Api.Test/bin/
+CompanyInvoiceApp.Api.Test/obj/
 
 .vscode/
 CompanyInvoiceApp.Api/.vscode/
 CompanyInvoiceApp.UI/.vscode/
+CompanyInvoiceApp.Api.Test/.vscode/
