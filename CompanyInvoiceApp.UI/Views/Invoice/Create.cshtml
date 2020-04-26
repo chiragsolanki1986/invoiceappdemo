@@ -1,0 +1,188 @@
+@model CompanyInvoiceApp.UI.Model.InvoiceViewModel
+
+@{
+    ViewData["Title"] = "Create Invoice";
+}
+
+<h1>Create</h1>
+
+<h4>Company</h4>
+<hr />
+<div class="row">
+    <div class="col-md-10">
+        <form asp-action="Create" method="POST">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            @Html.HiddenFor(model => model.CompanyCode)
+
+            <div class="form-group row">
+                <label asp-for="InvoiceDate" class="control-label col-sm-2 col-form-label"></label>
+                <div class="col-sm-10">
+                    <input type="date" asp-for="InvoiceDate" class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label asp-for="Remarks" class="control-label col-sm-2 col-form-label"></label>
+                <div class="col-sm-10">
+                    <input asp-for="Remarks" class="form-control" />
+                </div>
+            </div>
+
+            <h5>Customer Details</h4>
+            <hr/>
+
+            <div class="form-group row">
+                <label asp-for="CustomerDetails.CustomerContactName" class="control-label col-sm-2 col-form-label"></label>
+                <div class="col-sm-10">
+                    <input asp-for="CustomerDetails.CustomerContactName" class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label asp-for="CustomerDetails.CustomerCompanyName" class="control-label col-sm-2 col-form-label"></label>
+                <div class="col-sm-10">
+                    <input asp-for="CustomerDetails.CustomerCompanyName" class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label asp-for="CustomerDetails.CustomerAddress" class="control-label col-sm-2 col-form-label"></label>
+                <div class="col-sm-10">
+                    <input asp-for="CustomerDetails.CustomerAddress" class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label asp-for="CustomerDetails.PhoneNumber" class="control-label col-sm-2 col-form-label"></label>
+                <div class="col-sm-10">
+                    <input asp-for="CustomerDetails.PhoneNumber" class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label asp-for="CustomerDetails.CustomerEmail" class="control-label col-sm-2 col-form-label"></label>
+                <div class="col-sm-10">
+                    <input asp-for="CustomerDetails.CustomerEmail" class="form-control" />
+                </div>
+            </div>
+
+
+            <h5>Shipping Details</h4>
+            <hr/>
+            <div class="form-group row">
+                <label asp-for="ShippingDetails.Name" class="control-label col-sm-2 col-form-label"></label>
+                <div class="col-sm-10">
+                    <input asp-for="ShippingDetails.Name" class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label asp-for="ShippingDetails.ShipCompanyName" class="control-label col-sm-2 col-form-label"></label>
+                <div class="col-sm-10">
+                    <input asp-for="ShippingDetails.ShipCompanyName" class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label asp-for="ShippingDetails.ShippingAddress" class="control-label col-sm-2 col-form-label"></label>
+                <div class="col-sm-10">
+                    <input asp-for="ShippingDetails.ShippingAddress" class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label asp-for="ShippingDetails.PhoneNumber" class="control-label col-sm-2 col-form-label"></label>
+                <div class="col-sm-10">
+                    <input asp-for="ShippingDetails.PhoneNumber" type="tel" class="form-control" />
+                </div>
+            </div>
+
+            <h5>Discount and Tax Rate</h5>
+            <hr />
+            <div class="form-group row">
+                <label asp-for="Discount" class="control-label col-sm-2 col-form-label"></label>
+                <div class="col-sm-10">
+                    <input asp-for="Discount" type="tel" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="TaxRate" class="control-label col-sm-2 col-form-label"></label>
+                <div class="col-sm-10">
+                    <input asp-for="TaxRate" type="tel" class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label asp-for="ShippingCharges" class="control-label col-sm-2 col-form-label"></label>
+                <div class="col-sm-10">
+                    <input asp-for="ShippingCharges" type="tel" class="form-control" />
+                </div>
+            </div>
+
+
+            <div class="form-group row">
+                <h5>Invoice Line Items</p>
+                <hr/>                        
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <td>Description</td>
+                            <td>Unit Price</td>
+                            <td>Quantity</td>
+                            <td>Total</td>
+                        </tr>
+                    </thead>
+                </table>
+
+                @for (int i = 0; i < Model.LineItems.Count; i++)
+                {                        
+                    @Html.EditorFor(model => Model.LineItems[i])                                                             
+                }
+
+                <div class="form-group row">
+                    <div class="form-inline">
+                
+                        <div class="form-group">
+                            @* <label asp-for="Desccription" class="control-label col-sm-2 col-form-label"></label> *@
+                            <div>                                                    
+                                <input asp-for="NewLineItem.Desccription" class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @* <label asp-for="Quantity" class="control-label col-sm-2 col-form-label"></label> *@
+                            <div>
+                                <input asp-for="NewLineItem.Quantity" class="form-control " />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @* <label asp-for="UnitPrice" class="control-label col-sm-2 col-form-label"></label> *@
+                            <div >
+                                <input asp-for="NewLineItem.UnitPrice" class="form-control " />
+                            </div>
+                        </div>
+                            
+                        
+                        <div class="form-group">
+                            <input type="submit" value="Add Line Item" formaction="AddNewItem" class="btn btn-primary" />
+                        </div>
+                    </div>
+                </div> 
+            </div>
+
+            <div class="form-group row">
+                <input type="submit" value="Create" formaction="Create" formmethod="POST" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="form-group row">
+    <a asp-action="Index" asp-controller="Home">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

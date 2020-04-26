@@ -1,0 +1,12 @@
+
+.dll
+.com
+.exe
+CompanyInvoiceApp.Api/bin/
+CompanyInvoiceApp.Api/obj/
+CompanyInvoiceApp.UI/bin/
+CompanyInvoiceApp.UI/obj/
+
+.vscode/
+CompanyInvoiceApp.Api/.vscode/
+CompanyInvoiceApp.UI/.vscode/

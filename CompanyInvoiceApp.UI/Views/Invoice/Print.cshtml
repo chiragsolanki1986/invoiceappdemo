@@ -1,0 +1,188 @@
+@model CompanyInvoiceApp.UI.Model.InvoiceDetailedModel
+@{
+    ViewData["Title"] = "Print Invoice";
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <title>Print Invoice</title>
+</head>
+<body>
+   
+        <div class="col-11 jumbotronmaxheight jumbostyle">
+        <div id="invoicediv">
+            <div class="row">
+                <div class="col-9">
+                    
+                    <img src="~/Images/sample-image.png" style="margin-top: 10px;" class="img-fluid mr-2 d-inline-flex" />
+                    <div class="d-inline-flex">
+                        <div class="form-group">
+                            <h4>@Model.Company.CompanyName</h4>                        
+                            <p class="text-left">@Model.Company.AddressLine1</p>
+                            <p class="text-left">@Model.Company.AddressLine2</p>
+                            <p class="text-left">@Model.Company.AddressLine3</p>
+                            <p class="text-left">@Model.Company.ContactEmailId</p>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <h4>Invoice</h4>            
+                    <div class="form-group">
+                        <label>Date: @Model.InvoiceDate.ToShortDateString()</label> <p></p>
+                    </div>
+                    <hr/>
+                    <div class="form-group">
+                        <label>Invoice No: @Model.InvoiceNumber</label>
+                    </div>
+                    <hr />            
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-5">
+                    
+                    <h6>Bill To</h4>
+                    <hr/>
+                    <div class="d-inline-flex">
+                        <div class="form-group">
+                            <p class="text-left">@Model.CustomerDetails.CustomerContactName</p>
+                            <p class="text-left">@Model.CustomerDetails.CustomerCompanyName</p>
+                            <p class="text-left">@Model.CustomerDetails.CustomerAddress</p>
+                            <p class="text-left">@Model.CustomerDetails.PhoneNumber</p>
+                            <p class="text-left">@Model.CustomerDetails.CustomerEmail</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-5">
+                    
+                    <h6>Ship To</h4>
+                    <hr/>
+                    <div class="d-inline-flex">
+                        <div class="form-group">
+                            <p class="text-left">@Model.ShippingDetails.Name</p>
+                            <p class="text-left">@Model.ShippingDetails.ShipCompanyName</p>
+                            <p class="text-left">@Model.ShippingDetails.ShippingAddress</p>
+                            <p class="text-left">@Model.ShippingDetails.PhoneNumber</p>                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <table class="table table-striped customtable table-bordered">
+                    <thead class="">
+                        <tr class="tableRowColor">
+                            <td>Description</td>
+                            <td>Qty</td>
+                            <td>Unit Price</td>
+                            <td>Total</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.LineItems)
+                        {
+                            <tr>
+                                <td>@item.Desccription</td>
+                                <td style="text-align: right;">@item.Quantity</td>
+                                <td style="text-align: right;">@item.UnitPrice</td>
+                                <td style="text-align: right;">@item.Total</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="row">
+                <div class="col-9">
+                    <p>Remarks/Payment Instructions: @Model.Remarks</p>                
+                </div>
+                <div class="col-3">
+
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td>Sub Total</td>
+                                <td>@Model.SubTotal</td>
+                            </tr>
+                            <tr>
+                                <td>Discount</td>
+                                <td>@Model.Discount</td>
+                            </tr>
+                            <tr>
+                                <td>Sub Total Less Discount</td>
+                                <td>@Model.SubTotalLessDiscount</td>
+                            </tr>
+
+                            <tr>
+                                <td>Tax Rate</td>
+                                <td>@Model.TaxRate</td>
+                            </tr>
+
+                            <tr>
+                                <td>Total Tax</td>
+                                <td>@Model.TotalTax</td>
+                            </tr>
+
+                            <tr>
+                                <td>Shipping/Handling</td>
+                                <td>@Model.ShippingCharges</td>
+                            </tr>
+
+                            <tr>
+                                <td>Balance Due</td>
+                                <td style="background-color: #fab2aa; font-weight: bold;">@Model.BalanceDue</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+
+                    @* <div class="d-inline-flex">
+                        <div class="form-group">
+                            <p class="text-right">Sub Total:</p>                                                               
+                        </div>
+
+                        <div class="form-group" style="width: 150px;">
+                            <p class="text-right">@Model.SubTotal</p>
+                            <hr/>                                                
+                        </div>
+                    </div>
+
+                    <div class="d-inline-flex">
+                        <div class="form-group">
+                            <p class="text-right">Discount:</p>                                                               
+                        </div>
+
+                        <div class="form-group" style="width: 150px;">
+                            <p class="text-center">@Model.SubTotal</p>
+                            <hr/>                                                
+                        </div>
+                    </div> *@
+
+
+                </div>
+            </div>
+        </div>
+
+            <div class="row" style="margin-left: 50%; margin-bottom: 20px;">            
+                <button type="button" class="btn btn-primary" id="printbtn">Print</button>
+                <br>
+                <br>
+            </div>
+
+        </div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js"></script>
+
+</body>
+</html>

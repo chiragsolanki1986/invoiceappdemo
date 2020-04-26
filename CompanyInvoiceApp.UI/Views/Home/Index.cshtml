@@ -1,0 +1,48 @@
+﻿@model IEnumerable<CompanyInvoiceApp.UI.Model.Company>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h4>Welcome to Invoice App</h4>
+
+    
+     <div class="form-inline">
+         <p>List of Company</p>
+         <a asp-controller="Company" style="margin-left: 50px;" asp-action="Create" class="btn btn-primary">Create Company</a>
+    </div>
+
+
+    <div class="form-group">
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <td>Company Id</td>
+                    <td>
+                        Company Name
+                    </td>
+                    <td>
+
+                    </td>
+                </tr>
+
+            </thead>
+            <tbody>
+                @foreach (var item in @Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(model => item.CompanyCode)</td>
+                        <td>@Html.DisplayFor(model => item.CompanyName)</td>
+                        <td>
+                            @* <a asp-action="Edit" asp-controller="Company">Edit</a> |                         *@
+                            @Html.ActionLink("Create Invoice", "Create","Invoice", new { cid = item.CompanyCode }) |
+                            @Html.ActionLink("View Invoices", "Index","Invoice", new { code = item.CompanyCode, name = item.CompanyName }) 
+                            @* | <a asp-action="Delete" asp-controller="Company">Delete</a>  *@
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

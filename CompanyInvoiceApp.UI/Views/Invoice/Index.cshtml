@@ -1,0 +1,42 @@
+@model CompanyInvoiceApp.UI.Model.InvoiceListViewModel
+
+
+<h4>List of Invoices for @Model.CompanyName</h4>
+
+<div class="form-group row">
+
+    <table class="table">
+        <thead>
+            <tr>
+                <td>Invoice Date</td>
+                <td>Invoice Number</td>
+                <td>Total</td>
+                <td></td>                
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var invoiceItem in Model.Invoices)
+            {
+
+                <tr>
+                    <td>@invoiceItem.InvoiceDate.ToShortDateString()</td>
+                    <td>@invoiceItem.InvoiceNumber</td>
+                    <td>@invoiceItem.BalanceDue</td>
+                    <td>
+                        @Html.ActionLink("Print", "Print", new {id = invoiceItem.Id}, new { target = "_blank"})
+                        @* <a target="_blank" asp-action="Print" asp-all-route-data-id="@invoiceItem.Id" >Print</a>                         *@
+                    </td>
+                </tr>                
+            }
+
+
+        </tbody>
+
+    </table>
+
+
+</div>
+
+<div class="form-group row">
+    <a asp-action="Index" asp-controller="Home">Back to List</a>
+</div>
